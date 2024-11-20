@@ -13,8 +13,7 @@ import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 
 
-const express = require("express");
-const cors = require("cors");
+//const express = require("express");
 
 const app = express();
 app.use(
@@ -23,7 +22,6 @@ app.use(
         origin: process.env.NETLIFY_URL || "http://localhost:3000",
     })
 );  
-console.log("CORS configuration: ", process.env.NETLIFY_URL || "http://localhost:3000");
 
 const sessionOptions = {
     secret: process.env.SESSION_SECRET || "kanbas",
