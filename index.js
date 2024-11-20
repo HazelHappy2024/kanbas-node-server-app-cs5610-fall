@@ -1,5 +1,3 @@
-//const express = require("express");
-
 import express from "express";
 import Hello from "./Hello.js";
 import Lab5 from "./Lab5/index.js";
@@ -15,6 +13,8 @@ import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 
 
+const express = require("express");
+const cors = require("cors");
 
 const app = express();
 app.use(
@@ -23,6 +23,7 @@ app.use(
         origin: process.env.NETLIFY_URL || "http://localhost:3000",
     })
 );  
+console.log("CORS configuration: ", process.env.NETLIFY_URL || "http://localhost:3000");
 
 const sessionOptions = {
     secret: process.env.SESSION_SECRET || "kanbas",
