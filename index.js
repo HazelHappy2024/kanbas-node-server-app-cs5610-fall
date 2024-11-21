@@ -1,4 +1,5 @@
 import express from "express";
+import "dotenv/config";
 import Hello from "./Hello.js";
 import Lab5 from "./Lab5/index.js";
 import WorkingWithObjects from "./Lab5/WorkingWithObjects.js";
@@ -6,7 +7,6 @@ import WorkingWithArrays from "./Lab5/WorkingWithArrays.js";
 import CourseRoutes from "./Kanbas/Courses/routes.js";
 import cors from "cors";
 import UserRoutes from "./Kanbas/Users/routes.js";
-import "dotenv/config";
 import session from "express-session";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
@@ -42,7 +42,7 @@ app.use(
   
   
 app.use(express.json());
-const port = process.env.PORT || 4000;
+//const port = process.env.PORT || 4000;
 
 
 Hello(app);
