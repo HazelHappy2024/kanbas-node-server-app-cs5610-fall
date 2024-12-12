@@ -14,21 +14,40 @@ import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 import mongoose from "mongoose";
 
-//const express = require("express");
-
-console.log("Environment Variables:", process.env.MONGO_CONNECTION_STRING);
-
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas";
-mongoose.connect(CONNECTION_STRING);
 
 const app = express();
+console.log("Environment Variables:", process.env.MONGO_CONNECTION_STRING);
+
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb+srv://liushurui0106:<db_password>@kanbas.qblgw.mongodb.net/?retryWrites=true&w=majority&appName=Kanbas";
+mongoose.connect(CONNECTION_STRING);
+
+
+
+
+
+
+
+
+
+ 
+
 app.use(
-    cors({
-        credentials: true,
-        //origin: process.env.NETLIFY_URL || "http://localhost:3000",
-        origin:  "http://localhost:3000",
-    })
-);  
+  cors({
+    credentials: true,
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        process.env.NETLIFY_URL,
+        "http://localhost:3000",
+  
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
 
 const sessionOptions = {
     secret: process.env.SESSION_SECRET || "kanbas",
@@ -49,7 +68,7 @@ app.use(
   
   
 app.use(express.json());
-//const port = process.env.PORT || 4000;
+
 
 
 Hello(app);
