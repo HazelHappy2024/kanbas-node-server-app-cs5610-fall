@@ -2,7 +2,7 @@ import * as dao from "./dao.js";
 import * as courseDao from "../Courses/dao.js";
 import * as enrollmentsDao from "../Enrollments/dao.js";
 
-// let currentUser = null;
+
 
 export default function UserRoutes(app) {
   const createUser = async (req, res) => {
@@ -42,6 +42,9 @@ export default function UserRoutes(app) {
     }
     res.json(currentUser);
   };
+
+
+  //signup signin signout
   const signup = async (req, res) => {
     const user = await dao.findUserByUsername(req.body.username);
     if (user) {
@@ -86,7 +89,7 @@ export default function UserRoutes(app) {
   app.post("/api/users/signout", signout);
   app.post("/api/users/profile", profile);
 
-  // for course
+  // for course enrollments
   const findCoursesForUser = async (req, res) => {
     const currentUser = req.session["currentUser"];
     if (!currentUser) {

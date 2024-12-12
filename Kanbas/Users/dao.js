@@ -1,7 +1,6 @@
-//import db from "../Database/index.js";
-//let { users } = db;
 
 import model from "./model.js";
+
 // create
 export const createUser = (user) => {
   delete user._id;
