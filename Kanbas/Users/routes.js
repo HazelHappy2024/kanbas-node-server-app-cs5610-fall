@@ -36,12 +36,14 @@ export default function UserRoutes(app) {
     console.log("userUpdates", userUpdates);
     console.log("userId", userId);
     await dao.updateUser(userId, userUpdates);
+
     const currentUser = req.session["currentUser"];
     if (currentUser && currentUser._id === userId) {
       req.session["currentUser"] = { ...currentUser, ...userUpdates };
     }
     res.json(currentUser);
   };
+
   const signup = async (req, res) => {
     const user = await dao.findUserByUsername(req.body.username);
     if (user) {
@@ -71,14 +73,30 @@ export default function UserRoutes(app) {
     req.session.destroy();
     res.sendStatus(200);
   };
-  const profile = (req, res) => {
-    const currentUser = req.session["currentUser"];
-    if (!currentUser) {
-      res.sendStatus(401);
-      return;
+
+  const profile = async (req, res) => {
+    try {
+      // 检查 session 是否存在
+      if (!req.session || !req.session["currentUser"]) {
+        return res.status(401).json({ message: "Unauthorized: Please log in." });
+      }
+  
+      const currentUser = req.session["currentUser"];
+  
+      // 如果需要从数据库中刷新用户数据，可以使用以下代码：
+      // const user = await dao.findUserById(currentUser._id);
+      // if (!user) {
+      //   return res.status(404).json({ message: "User not found" });
+      // }
+  
+      // 返回当前用户数据
+      res.json(currentUser);
+    } catch (err) {
+      console.error("Error in /api/users/profile:", err);
+      res.status(500).json({ message: "Internal Server Error" });
     }
-    res.json(currentUser);
   };
+  
 
 
   // for course
