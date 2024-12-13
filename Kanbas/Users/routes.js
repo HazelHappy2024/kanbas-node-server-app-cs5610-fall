@@ -123,7 +123,7 @@ export default function UserRoutes(app) {
     const users = await enrollmentsDao.findUsersForCourse(cid);
     res.json(users);
   };
-  app.get("/api/courses/:cid/People", findUsersForCourse);
+  app.get("/api/courses/:cid/users", findUsersForCourse);
 
   //create an enrollment
   const enrollUserInCourse = async (req, res) => {
