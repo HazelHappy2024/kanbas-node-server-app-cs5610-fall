@@ -1,4 +1,5 @@
-
+// import db from "../Database/index.js";
+// let { users } = db;
 import model from "./model.js";
 
 // create

@@ -18,5 +18,10 @@ export function findAssignmentsForCourse(courseId) {
 
 export function updateAssignment(assignmentId, assignmentUpdates) {
   return model.updateOne({ _id: assignmentId }, { $set: assignmentUpdates });
-
+  // const { assignments } = Database;
+  // const assignment = assignments.find(
+  //   (assignment) => assignment._id === assignmentId
+  // );
+  // Object.assign(assignment, assignmentUpdates);
+  // return assignment;
 }

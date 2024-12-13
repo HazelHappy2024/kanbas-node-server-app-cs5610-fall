@@ -1,3 +1,4 @@
+// import Database from "../Database/index.js";
 import model from "./model.js";
 
 export function createCourse(course) {
@@ -27,4 +28,3 @@ export function findCoursesForEnrolledUser(userId) {
   );
   return enrolledCourses;
 }
-  
