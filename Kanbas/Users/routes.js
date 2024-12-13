@@ -2,12 +2,18 @@ import * as dao from "./dao.js";
 import * as courseDao from "../Courses/dao.js";
 import * as enrollmentsDao from "../Enrollments/dao.js";
 
-let currentUser = null; //currentUser is a global variable used to store the currently authenticated user's data.
+let currentUser = null; //currentUser is a global variable used to store the currently authenticated user's data.'
+
 
 export default function UserRoutes(app) {
   const signin = async (req, res) => {
     const { username, password } = req.body;
+    console.log("Signin attempt:", { username, password }); // 打印登录尝试的用户名和密码
+    
+
     const currentUser = await dao.findUserByCredentials(username, password);
+    console.log("FindUserByCredentials result:", currentUser); // 打印匹配结果
+    
     if (currentUser) {
       req.session["currentUser"] = currentUser;
       res.json(currentUser);
