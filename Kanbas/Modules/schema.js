@@ -4,7 +4,7 @@ const schema = new mongoose.Schema(
   {
     name: String,
     description: String,
-    course: { type: mongoose.Schema.Types.ObjectId, ref: "CourseModel" },
+    course: { type: mongoose.Schema.Types.String, ref: "CourseModel" },
   },
   { collection: "modules" }
 );
