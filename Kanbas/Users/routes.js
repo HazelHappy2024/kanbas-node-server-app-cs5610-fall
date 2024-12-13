@@ -13,7 +13,7 @@ export default function UserRoutes(app) {
 
     const currentUser = await dao.findUserByCredentials(username, password);
     console.log("FindUserByCredentials result:", currentUser); // 打印匹配结果
-    
+
     if (currentUser) {
       req.session["currentUser"] = currentUser;
       res.json(currentUser);
@@ -49,25 +49,17 @@ export default function UserRoutes(app) {
   app.put("/api/users/:userId", updateUser);
 
   const findAllUsers = async (req, res) => {
-    const { role, name } = req.query; //pass element in query
-    if (role && name) {
-      const users = await dao.findUsersByFilters(role, name);
-      res.json(users);
-      return;
-    }
+    const { role, name } = req.query;
     if (role) {
       const users = await dao.findUsersByRole(role);
       res.json(users);
       return;
     }
-    if (name) {
-      const users = await dao.findUsersByPartialName(name);
-      res.json(users);
-      return;
-    }
+    
     const users = await dao.findAllUsers();
     res.json(users);
   };
+
   app.get("/api/users", findAllUsers);
 
   const findUserById = async (req, res) => {
